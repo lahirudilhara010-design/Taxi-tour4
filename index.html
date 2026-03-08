@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LD Taxi & Tour Drivers Lanka | Explore Sri Lanka</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        'lanka-green': '#006747',
+                        'lanka-gold': '#FFB300',
+                        'lanka-orange': '#FF6B00',
+                        'sand': '#F5F5F0',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #006747;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #004d36;
+        }
+ 
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+ 
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+ 
+        /* Hero Parallax */
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1588258525935-2b9293518645?q=80&w=2070&auto=format&fit=crop');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+ 
+        /* Image Hover Zoom */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom {
+            transition: transform 0.5s ease;
+        }
+        .img-zoom-container:hover .img-zoom {
+            transform: scale(1.1);
+        }
+ 
+        /* Loader */
+        .loader {
+            border-top-color: #006747;
+            -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased bg-sand overflow-x-hidden">
+ 
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center bg-white transition-opacity duration-500">
+        <div class="text-center">
+            <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4 mx-auto"></div>
+            <h2 class="text-xl font-serif text-lanka-green font-bold">LD Taxi & Tour Drivers Lanka</h2>
+            <p class="text-sm text-gray-500">Loading your adventure...</p>
+        </div>
+    </div>
+ 
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 bg-transparent py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <i class="fas fa-taxi text-3xl text-lanka-gold mr-2"></i>
+                    <div>
+                        <h1 class="font-serif text-2xl font-bold text-white tracking-wide drop-shadow-md">LD <span class="text-lanka-gold">Lanka</span></h1>
+                        <p class="text-xs text-gray-200 tracking-widest uppercase">Taxi & Tours</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-white hover:text-lanka-gold font-medium transition drop-shadow-sm">Home</a>
+                    <a href="#about" class="text-white hover:text-lanka-gold font-medium transition drop-shadow-sm">About</a>
+                    <a href="#services" class="text-white hover:text-lanka-gold font-medium transition drop-shadow-sm">Services</a>
+                    <a href="#tours" class="text-white hover:text-lanka-gold font-medium transition drop-shadow-sm">Tours</a>
+                    <a href="#gallery" class="text-white hover:text-lanka-gold font-medium transition drop-shadow-sm">Gallery</a>
+                    <a href="#contact" class="px-6 py-2 bg-lanka-orange text-white rounded-full font-bold hover:bg-orange-600 transition shadow-lg transform hover:scale-105">Book Now</a>
+                </div>
+ 
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white hover:text-lanka-gold focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+ 
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-lanka-green absolute w-full shadow-xl">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-lanka-gold hover:text-white">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-lanka-gold hover:text-white">About</a>
+                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-lanka-gold hover:text-white">Services</a>
+                <a href="#tours" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-lanka-gold hover:text-white">Tours</a>
+                <a href="#gallery" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-lanka-gold hover:text-white">Gallery</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-lanka-gold font-bold">Book Now</a>
+            </div>
+        </div>
+    </nav>
+ 
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center hero-bg overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto" id="hero-content">
+            <span class="inline-block py-1 px-3 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-semibold tracking-wider mb-4 border border-white/30 animate-fade-in-up" style="animation-delay: 0.1s;">
+                WELCOME TO PARADISE
+            </span>
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight drop-shadow-2xl animate-fade-in-up" style="animation-delay: 0.3s;">
+                Discover the Pearl of the <br/><span class="text-lanka-gold">Indian Ocean</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-100 mb-10 font-light max-w-2xl mx-auto drop-shadow-md animate-fade-in-up" style="animation-delay: 0.5s;">
+                Safe, comfortable, and affordable taxi and tour services across Sri Lanka. Your journey, our passion.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style="animation-delay: 0.7s;">
+                <a href="#contact" class="px-8 py-4 bg-lanka-orange text-white rounded-full font-bold text-lg hover:bg-orange-600 transition shadow-lg transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                    <i class="fas fa-calendar-check"></i> Book Your Ride
+                </a>
+                <a href="https://wa.me/94767655031" target="_blank" class="px-8 py-4 bg-green-600 text-white rounded-full font-bold text-lg hover:bg-green-700 transition shadow-lg transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Us
+                </a>
+            </div>
+        </div>
+ 
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-white text-3xl opacity-80 hover:opacity-100 transition">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+ 
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 bg-lanka-gold rounded-full opacity-20 z-0"></div>
+                    <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-lanka-green rounded-full opacity-10 z-0"></div>
+                    <img src="https://images.unsplash.com/photo-1546706878-92f48f7b8601?q=80&w=2070&auto=format&fit=crop" alt="Sri Lankan Driver" class="relative z-10 rounded-lg shadow-2xl w-full object-cover h-[500px]">
+                    <div class="absolute bottom-10 -right-6 z-20 bg-white p-6 rounded-lg shadow-xl max-w-xs hidden md:block animate-float">
+                        <div class="flex items-center gap-4 mb-2">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600">
+                                <i class="fas fa-shield-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">100% Safe</h4>
+                                <p class="text-xs text-gray-500">Licensed & Insured</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2 class="text-lanka-orange font-bold tracking-wider uppercase text-sm mb-2">About Us</h2>
+                    <h3 class="text-4xl font-serif font-bold text-lanka-green mb-6">Your Trusted Travel Partner in Sri Lanka</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        LD Taxi & Tour Drivers Lanka is a premier transportation and tour service provider dedicated to showcasing the beauty of Sri Lanka. With years of experience navigating the island's diverse landscapes, we offer more than just a ride—we offer an experience.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Our team of professional drivers are not just experts behind the wheel; they are local guides passionate about sharing the history, culture, and hidden gems of Sri Lanka. Whether you need a quick airport transfer or a multi-day cultural expedition, we ensure comfort, safety, and reliability.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-full bg-lanka-green/10 flex items-center justify-center text-lanka-green flex-shrink-0">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Expert Drivers</h4>
+                                <p class="text-sm text-gray-500">Fluent in English with extensive local knowledge.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-full bg-lanka-green/10 flex items-center justify-center text-lanka-green flex-shrink-0">
+                                <i class="fas fa-car-side"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Modern Fleet</h4>
+                                <p class="text-sm text-gray-500">Air-conditioned, well-maintained vehicles.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-full bg-lanka-green/10 flex items-center justify-center text-lanka-green flex-shrink-0">
+                                <i class="fas fa-tags"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Best Rates</h4>
+                                <p class="text-sm text-gray-500">Transparent pricing with no hidden fees.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-full bg-lanka-green/10 flex items-center justify-center text-lanka-green flex-shrink-0">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">24/7 Support</h4>
+                                <p class="text-sm text-gray-500">Always available for your travel needs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-sand relative">
+        <div class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-lanka-orange font-bold tracking-wider uppercase text-sm mb-2">Our Services</h2>
+                <h3 class="text-4xl font-serif font-bold text-lanka-green">How Can We Help You?</h3>
+            </div>
+ 
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 text-2xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                        <i class="fas fa-plane-arrival"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">Airport Transfers</h4>
+                    <p class="text-gray-600 text-sm mb-4">Punctual pickup and drop-off services to and from Colombo (CMB) airport. Flight tracking included.</p>
+                    <a href="#contact" class="text-lanka-green font-semibold text-sm hover:text-lanka-orange transition">Book Transfer <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+ 
+                <!-- Service 2 -->
+                <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-orange-50 rounded-full flex items-center justify-center text-orange-600 text-2xl mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">City Taxi</h4>
+                    <p class="text-gray-600 text-sm mb-4">Quick and reliable rides within Colombo, Kandy, Galle, and other major cities. Metered or fixed rates.</p>
+                    <a href="#contact" class="text-lanka-green font-semibold text-sm hover:text-lanka-orange transition">Get a Ride <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+ 
+                <!-- Service 3 -->
+                <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center text-green-600 text-2xl mb-6 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                        <i class="fas fa-road"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">Long Distance</h4>
+                    <p class="text-gray-600 text-sm mb-4">Travel comfortably between cities. Perfect for moving from the coast to the highlands.</p>
+                    <a href="#contact" class="text-lanka-green font-semibold text-sm hover:text-lanka-orange transition">Plan Trip <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+ 
+                <!-- Service 4 -->
+                <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-purple-50 rounded-full flex items-center justify-center text-purple-600 text-2xl mb-6 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">Private Driver</h4>
+                    <p class="text-gray-600 text-sm mb-4">Hire a dedicated driver for your entire stay. Flexible itinerary and personalized attention.</p>
+                    <a href="#contact" class="text-lanka-green font-semibold text-sm hover:text-lanka-orange transition">Hire Now <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Tours Section -->
+    <section id="tours" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-lanka-orange font-bold tracking-wider uppercase text-sm mb-2">Popular Tours</h2>
+                <h3 class="text-4xl font-serif font-bold text-lanka-green">Explore the Island</h3>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Choose from our curated selection of the best experiences Sri Lanka has to offer.</p>
+            </div>
+ 
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Tour 1: Sigiriya -->
+                <div class="group rounded-2xl overflow-hidden shadow-lg relative h-96 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1586613836437-717a09a75416?q=80&w=2070&auto=format&fit=crop" alt="Sigiriya" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-6 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div class="flex justify-between items-end mb-2">
+                            <h4 class="text-2xl font-serif font-bold">Sigiriya Rock</h4>
+                            <span class="bg-lanka-gold text-black text-xs font-bold px-2 py-1 rounded">Cultural</span>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Climb the ancient rock fortress and marvel at the frescoes. A UNESCO World Heritage site.</p>
+                        <button onclick="selectTour('Sigiriya Rock Fortress Tour')" class="text-lanka-gold font-bold text-sm hover:text-white transition">Inquire Now <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+ 
+                <!-- Tour 2: Kandy -->
+                <div class="group rounded-2xl overflow-hidden shadow-lg relative h-96 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1562696271-058001281816?q=80&w=2070&auto=format&fit=crop" alt="Kandy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-6 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div class="flex justify-between items-end mb-2">
+                            <h4 class="text-2xl font-serif font-bold">Kandy & Temple</h4>
+                            <span class="bg-lanka-gold text-black text-xs font-bold px-2 py-1 rounded">Spiritual</span>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Visit the Temple of the Sacred Tooth Relic and enjoy the cool climate of the hill country.</p>
+                        <button onclick="selectTour('Kandy Temple Tour')" class="text-lanka-gold font-bold text-sm hover:text-white transition">Inquire Now <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+ 
+                <!-- Tour 3: Ella -->
+                <div class="group rounded-2xl overflow-hidden shadow-lg relative h-96 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1622396090075-220e5d47b22d?q=80&w=2070&auto=format&fit=crop" alt="Ella" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-6 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div class="flex justify-between items-end mb-2">
+                            <h4 class="text-2xl font-serif font-bold">Ella & Nine Arch</h4>
+                            <span class="bg-lanka-gold text-black text-xs font-bold px-2 py-1 rounded">Scenic</span>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Hike through tea plantations and witness the iconic Nine Arch Bridge. Perfect for nature lovers.</p>
+                        <button onclick="selectTour('Ella Nine Arch Bridge Tour')" class="text-lanka-gold font-bold text-sm hover:text-white transition">Inquire Now <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+ 
+                <!-- Tour 4: Yala -->
+                <div class="group rounded-2xl overflow-hidden shadow-lg relative h-96 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=2068&auto=format&fit=crop" alt="Yala" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-6 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div class="flex justify-between items-end mb-2">
+                            <h4 class="text-2xl font-serif font-bold">Yala Safari</h4>
+                            <span class="bg-lanka-gold text-black text-xs font-bold px-2 py-1 rounded">Wildlife</span>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Spot leopards, elephants, and exotic birds in Sri Lanka's most famous national park.</p>
+                        <button onclick="selectTour('Yala National Park Safari')" class="text-lanka-gold font-bold text-sm hover:text-white transition">Inquire Now <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+ 
+                <!-- Tour 5: Beaches -->
+                <div class="group rounded-2xl overflow-hidden shadow-lg relative h-96 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?q=80&w=1974&auto=format&fit=crop" alt="Mirissa" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-6 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div class="flex justify-between items-end mb-2">
+                            <h4 class="text-2xl font-serif font-bold">South Coast Beaches</h4>
+                            <span class="bg-lanka-gold text-black text-xs font-bold px-2 py-1 rounded">Relax</span>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Relax on the golden sands of Mirissa and Unawatuna. Whale watching optional.</p>
+                        <button onclick="selectTour('South Coast Beach Tour')" class="text-lanka-gold font-bold text-sm hover:text-white transition">Inquire Now <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+ 
+                <!-- Custom Tour -->
+                <div class="group rounded-2xl overflow-hidden shadow-lg relative h-96 cursor-pointer border-2 border-dashed border-gray-300 bg-gray-50 flex flex-col items-center justify-center text-center p-6 hover:bg-white hover:border-lanka-green transition">
+                    <div class="w-16 h-16 bg-lanka-green/10 rounded-full flex items-center justify-center text-lanka-green text-2xl mb-4">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Custom Tour</h4>
+                    <p class="text-gray-500 text-sm mb-6">Have something else in mind? Let's build your perfect itinerary together.</p>
+                    <button onclick="selectTour('Custom Tour Request')" class="px-6 py-2 bg-lanka-green text-white rounded-full font-bold hover:bg-lanka-orange transition">Create Plan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-sand">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-lanka-orange font-bold tracking-wider uppercase text-sm mb-2">Gallery</h2>
+                <h3 class="text-4xl font-serif font-bold text-lanka-green">Glimpses of Paradise</h3>
+            </div>
+ 
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
+                <!-- Gallery Items -->
+                <div class="img-zoom-container row-span-2 col-span-2 rounded-lg overflow-hidden cursor-pointer relative group" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1566297468482-919d170d9b09?q=80&w=2070&auto=format&fit=crop" class="img-zoom w-full h-full object-cover" alt="Tea Plantations">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors"></div>
+                </div>
+                <div class="img-zoom-container rounded-lg overflow-hidden cursor-pointer relative group" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1546706878-92f48f7b8601?q=80&w=2070&auto=format&fit=crop" class="img-zoom w-full h-full object-cover" alt="Local Culture">
+                </div>
+                <div class="img-zoom-container rounded-lg overflow-hidden cursor-pointer relative group" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1588258525935-2b9293518645?q=80&w=2070&auto=format&fit=crop" class="img-zoom w-full h-full object-cover" alt="Train Journey">
+                </div>
+                <div class="img-zoom-container row-span-2 rounded-lg overflow-hidden cursor-pointer relative group" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?q=80&w=1932&auto=format&fit=crop" class="img-zoom w-full h-full object-cover" alt="Elephants">
+                </div>
+                <div class="img-zoom-container rounded-lg overflow-hidden cursor-pointer relative group" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=2039&auto=format&fit=crop" class="img-zoom w-full h-full object-cover" alt="Tuk Tuk">
+                </div>
+                <div class="img-zoom-container col-span-2 rounded-lg overflow-hidden cursor-pointer relative group" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1576487503230-b6dc3ad12eea?q=80&w=2070&auto=format&fit=crop" class="img-zoom w-full h-full object-cover" alt="Beach Sunset">
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Reviews Section -->
+    <section class="py-20 bg-lanka-green text-white relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-64 h-64 bg-white opacity-5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-lanka-gold opacity-10 rounded-full translate-x-1/3 translate-y-1/3"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-serif font-bold">What Travelers Say</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-white/10 backdrop-blur-md p-8 rounded-xl border border-white/20">
+                    <div class="flex text-lanka-gold mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="italic mb-6 text-gray-200">"The best way to see Sri Lanka! Our driver was punctual, safe, and knew all the best local spots for food. Highly recommended!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full overflow-hidden">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-sm">Sarah Jenkins</h5>
+                            <p class="text-xs text-gray-400">UK</p>
+                        </div>
+                    </div>
+                </div>
+ 
+                <!-- Review 2 -->
+                <div class="bg-white/10 backdrop-blur-md p-8 rounded-xl border border-white/20">
+                    <div class="flex text-lanka-gold mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="italic mb-6 text-gray-200">"We booked a 5-day tour. The car was clean and comfortable. The itinerary was flexible, which we loved. Great value for money."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full overflow-hidden">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-sm">Mark & Lisa</h5>
+                            <p class="text-xs text-gray-400">Germany</p>
+                        </div>
+                    </div>
+                </div>
+ 
+                <!-- Review 3 -->
+                <div class="bg-white/10 backdrop-blur-md p-8 rounded-xl border border-white/20">
+                    <div class="flex text-lanka-gold mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="italic mb-6 text-gray-200">"Seamless airport pickup after a long flight. The WhatsApp communication made it so easy to coordinate. Thank you LD Lanka!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full overflow-hidden">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-sm">Emily Chen</h5>
+                            <p class="text-xs text-gray-400">Australia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div>
+                    <h2 class="text-lanka-orange font-bold tracking-wider uppercase text-sm mb-2">Contact Us</h2>
+                    <h3 class="text-4xl font-serif font-bold text-lanka-green mb-6">Start Your Journey</h3>
+                    <p class="text-gray-600 mb-8">Ready to book or have questions? Reach out to us directly via WhatsApp for the fastest response, or fill out the form.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-xl flex-shrink-0">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">WhatsApp / Phone</h4>
+                                <p class="text-gray-600">+94 76 765 5031</p>
+                                <p class="text-xs text-gray-400">Instant Reply</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xl flex-shrink-0">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Email</h4>
+                                <p class="text-gray-600">info@lahirudilhara010 @gmail.com</p>
+                            </div>
+                        </div>
+ 
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-600 text-xl flex-shrink-0">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Location</h4>
+                                <p class="text-gray-600">Udawalawa, Sri Lanka</p>
+                            </div>
+                        </div>
+                    </div>
+ 
+                    <!-- Map Embed -->
+                    <div class="mt-8 rounded-xl overflow-hidden shadow-lg h-64 w-full bg-gray-200">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126743.58585974993!2d79.8562055!3d6.9218374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae253d10f7a0003%3A0x320a2e4d32d3838d!2sColombo%2C%20Sri%20Lanka!5e0!3m2!1sen!2sus!4v1709400000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+ 
+                <!-- Booking Form -->
+                <div class="bg-sand p-8 rounded-2xl shadow-lg">
+                    <form id="bookingForm" onsubmit="handleBooking(event)">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-lanka-green focus:border-transparent outline-none transition" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Country</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-lanka-green focus:border-transparent outline-none transition" placeholder="e.g. USA">
+                            </div>
+                        </div>
+ 
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">WhatsApp / Phone</label>
+                                <input type="tel" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-lanka-green focus:border-transparent outline-none transition" placeholder="+1 234 567 890">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                <input type="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-lanka-green focus:border-transparent outline-none transition" placeholder="john@example.com">
+                            </div>
+                        </div>
+ 
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Pickup Location</label>
+                                <input type="text" id="pickup" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-lanka-green focus:border-transparent outline-none transition" placeholder="Airport / Hotel">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Destination / Tour</label>
+                                <input type="text" id="destination" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-lanka-green focus:border-transparent outline-none transition" placeholder="e.g. Sigiriya Tour">
+                            </div>
+                        </div>
+ 
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Date</label>
+                            <input type="date" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-lanka-green focus:border-transparent outline-none transition">
+                        </div>
+ 
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Message / Special Requests</label>
+                            <textarea rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-lanka-green focus:border-transparent outline-none transition" placeholder="Number of passengers, luggage, etc."></textarea>
+                        </div>
+ 
+                        <button type="submit" class="w-full py-4 bg-lanka-green text-white font-bold rounded-lg hover:bg-lanka-orange transition shadow-lg transform active:scale-95">
+                            Send Booking Request
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-taxi text-2xl text-lanka-gold mr-2"></i>
+                        <h2 class="font-serif text-xl font-bold">LD Lanka</h2>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">Your reliable partner for exploring the beautiful island of Sri Lanka. Safe, comfortable, and memorable journeys.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4 text-lanka-gold">Quick Links</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#home" class="hover:text-white transition">Home</a></li>
+                        <li><a href="#about" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#services" class="hover:text-white transition">Services</a></li>
+                        <li><a href="#tours" class="hover:text-white transition">Tours</a></li>
+                    </ul>
+                </div>
+ 
+                <div>
+                    <h3 class="text-lg font-bold mb-4 text-lanka-gold">Popular Tours</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#tours" class="hover:text-white transition">Sigiriya Rock</a></li>
+                        <li><a href="#tours" class="hover:text-white transition">Kandy Temple</a></li>
+                        <li><a href="#tours" class="hover:text-white transition">Ella Train Ride</a></li>
+                        <li><a href="#tours" class="hover:text-white transition">udawalawa  Safari</a></li>
+                    </ul>
+                </div>
+ 
+                <div>
+                    <h3 class="text-lg font-bold mb-4 text-lanka-gold">Contact</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><i class="fas fa-phone mr-2"></i> +94 76 765 5031</li>
+                        <li><i class="fas fa-envelope mr-2"></i> info@lahirudilhara010@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> Udawalawa , Sri Lanka</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2024 LD Taxi & Tour Drivers Lanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+ 
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/94767655031" target="_blank" class="fixed bottom-6 right-6 z-50 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-600 transition transform hover:scale-110 animate-bounce" style="animation-duration: 3s;">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
+ 
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-50 bg-black/95 hidden flex items-center justify-center p-4" onclick="closeLightbox()">
+        <button class="absolute top-4 right-4 text-white text-4xl hover:text-gray-300" onclick="closeLightbox()">&times;</button>
+        <img id="lightbox-img" src="" alt="Full size" class="max-h-[90vh] max-w-full rounded-lg shadow-2xl">
+    </div>
+ 
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-24 right-6 bg-white border-l-4 border-lanka-green shadow-2xl rounded-lg p-4 transform translate-x-full transition-transform duration-300 z-50 max-w-sm">
+        <div class="flex items-start gap-3">
+            <div class="text-green-500 text-xl"><i class="fas fa-check-circle"></i></div>
+            <div>
+                <h4 class="font-bold text-gray-800">Request Sent!</h4>
+                <p class="text-sm text-gray-600">We will contact you shortly via WhatsApp or Email.</p>
+            </div>
+        </div>
+    </div>
+ 
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        });
+ 
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-md');
+                navbar.classList.remove('bg-transparent', 'py-4');
+                navbar.classList.add('py-2');
+                
+                // Change text colors for visibility on white
+                document.querySelectorAll('#navbar a:not(.bg-lanka-orange)').forEach(link => {
+                    link.classList.remove('text-white');
+                    link.classList.add('text-gray-800');
+                });
+                document.querySelectorAll('#navbar h1, #navbar p').forEach(el => {
+                    el.classList.remove('text-white', 'text-gray-200');
+                    el.classList.add('text-lanka-green');
+                });
+                document.getElementById('mobile-menu-btn').classList.remove('text-white');
+                document.getElementById('mobile-menu-btn').classList.add('text-gray-800');
+            } else {
+                navbar.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-md', 'py-2');
+                navbar.classList.add('bg-transparent', 'py-4');
+                
+                // Revert text colors
+                document.querySelectorAll('#navbar a:not(.bg-lanka-orange)').forEach(link => {
+                    link.classList.add('text-white');
+                    link.classList.remove('text-gray-800');
+                });
+                document.querySelectorAll('#navbar h1').forEach(el => {
+                    el.classList.add('text-white');
+                    el.classList.remove('text-lanka-green');
+                });
+                document.querySelectorAll('#navbar p').forEach(el => {
+                    el.classList.add('text-gray-200');
+                    el.classList.remove('text-lanka-green');
+                });
+                document.getElementById('mobile-menu-btn').classList.add('text-white');
+                document.getElementById('mobile-menu-btn').classList.remove('text-gray-800');
+            }
+        });
+ 
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+ 
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+ 
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                menu.classList.add('hidden'); // Close mobile menu on click
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+ 
+        // Tour Selection Logic
+        function selectTour(tourName) {
+            document.getElementById('destination').value = tourName;
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            
+            // Highlight effect on input
+            const destInput = document.getElementById('destination');
+            destInput.classList.add('ring-2', 'ring-lanka-orange');
+            setTimeout(() => destInput.classList.remove('ring-2', 'ring-lanka-orange'), 2000);
+        }
+ 
+        // Form Handling
+        function handleBooking(e) {
+            e.preventDefault();
+            
+            // Simulate API call
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = 'Sending...';
+            btn.disabled = true;
+            btn.classList.add('opacity-75');
+ 
+            setTimeout(() => {
+                // Show Toast
+                const toast = document.getElementById('toast');
+                toast.classList.remove('translate-x-full');
+                
+                // Reset Form
+                e.target.reset();
+                btn.innerText = originalText;
+                btn.disabled = false;
+                btn.classList.remove('opacity-75');
